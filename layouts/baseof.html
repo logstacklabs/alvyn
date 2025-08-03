@@ -19,13 +19,13 @@
         {{ partial "head.html" . }}
     </head>
     <body>
-        <header class="main-header">
+        <header>
             {{ partial "header.html" . }}
         </header>
         <main>
             {{ block "main" . }}{{ end }}
         </main>
-        <footer class="main-footer">
+        <footer>
             {{ partial "footer.html" . }}
         </footer>
         {{ partialCached "head/js.html" . }}

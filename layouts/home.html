@@ -1,34 +1,52 @@
 {{ define "main" }}
     {{ $sections := .Site.Data.sections }}
-    <section id="hero" class="section">
-        {{ partial "utilities/hero.html" $sections.hero }}
-    </section>
 
-    <section id="about" class="section">
-        {{ partial "utilities/about.html" $sections.about }}
-    </section>
+    {{ with $sections.hero }}
+        <section id="hero" class="section">
+            {{ partial "utilities/hero.html" . }}
+        </section>
+    {{ end }}
 
-    <section id="focus-areas" class="section">
-        {{ partial "utilities/expertise.html" $sections.expertise }}
-    </section>
+    {{ with $sections.about }}
+        <section id="about" class="section">
+            {{ partial "utilities/about.html" . }}
+        </section>
+    {{ end }}
 
-    <section id="projects" class="section">
-        {{ partial "utilities/projects.html" $sections.projects }}
-    </section>
+    {{ with $sections.expertise }}
+        <section id="focus-areas" class="section">
+            {{ partial "utilities/expertise.html" . }}
+        </section>
+    {{ end }}
 
-    <section id="blog" class="section">
-        {{ partial "utilities/rss.html" $sections.rssFeed }}
-    </section>
+    {{ with $sections.projects }}
+        <section id="projects" class="section">
+            {{ partial "utilities/projects.html" . }}
+        </section>
+    {{ end }}
 
-    <section id="services" class="section">
-        {{ partial "utilities/services.html" $sections.services }}
-    </section>
+    {{ with $sections.rssFeed }}
+        <section id="blog" class="section">
+            {{ partial "utilities/rss.html" . }}
+        </section>
+    {{ end }}
 
-    <section id="team" class="section">
-        {{ partial "utilities/team.html" $sections.team }}
-    </section>
+    {{ with $sections.services }}
+        <section id="services" class="section">
+            {{ partial "utilities/services.html" . }}
+        </section>
+    {{ end }}
 
-    <section id="contact" class="section">
-        {{ partial "utilities/contact.html" $sections.contact }}
-    </section>
+    {{ with $sections.team }}
+        <section id="team" class="section">
+            {{ partial "utilities/team.html" . }}
+        </section>
+    {{ end }}
+
+    {{ with $sections.contact }}
+        <section id="contact" class="section">
+            {{ partial "utilities/contact.html" . }}
+        </section>
+    {{ end }}
+
 {{ end }}

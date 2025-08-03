@@ -122,11 +122,11 @@
 {{ end }}
 
 {{ $founder := dict }}
-{{ with (index site.Data.sections.team.member 0) }}
+{{ with (index site.Data.sections.team.member 0) | default $attrs.copyright_holder }}
     {{ $founder = merge $founder (dict
             "@type" "Person"
-            "name"  .name
-            "url"   .website) }}
+            "name"  (.name | default $attrs.copyright_holder)
+            "url"   (.website | default site.Title)) }}
 {{ end }}
 
 {{ $contactPoint := dict }}
