@@ -1,0 +1,47 @@
+@use 'sass:color';
+@use '@logstack/eon/dist/eon' as *;
+
+@include eon-colors();
+
+:root {
+    --primary: var(--eo-terra);
+    --secondary: var(--eo-white);
+    --accent: var(--eo-teal);
+    --card-color: var(--eo-night);
+    --border-color: var(--eo-coal);
+    --bg-color: var(--eo-pitch);
+    --text-muted: #{color.change(eon-color-value('white'), $alpha: 0.7)};
+    --text-color: var(--eo-white);
+
+    --nav-bg: var(--eo-black);
+    --shadow-primary: #{color.change(eon-color-value('powder'), $alpha: 0.1)};
+    --shadow-secondary: #{color.change(eon-color-value('pitch'), $alpha: 0.2)};
+    --hero-gradient: radial-gradient(circle, #{color.change(eon-color-value('olive'), $alpha: 0.1)} 0%, #{color.change(eon-color-value('night'), $alpha: 0)} 60%);
+}
+
+[data-theme="light"] {
+    --card-color: var(--eo-white);
+    --border-color: var(--eo-cream); //#E4E4E7;
+    --bg-color: var(--eo-powder);
+    --text-muted: #{color.change(eon-color-value('black'), $alpha: 0.7)};
+    --text-color: var(--eo-black);
+
+    --nav-bg: var(--eo-white);
+    --shadow-primary: #{color.change(eon-color-value('night'), $alpha: 0.1)};
+    --shadow-secondary: #{color.change(eon-color-value('powder'), $alpha: 0.2)};
+    --hero-gradient: radial-gradient(circle, #{color.change(eon-color-value('olive'), $alpha: 0.1)} 0%, #{color.change(eon-color-value('powder'), $alpha: 0)} 60%);
+}
+
+$min-vw: 20rem;
+$max-vw: 84rem;
+
+$font-inter:    'Inter',sans-serif;
+$font-jura:     'Jura', sans-serif;
+$font-exo:      'Exo 2', sans-serif;
+$font-berg:     'Iceberg', sans-serif;
+$font-plex:     'Ibm Plex Sans', sans-serif;
+
+$font-body: 'Inter',sans-serif;
+$font-footer: 'Jura', sans-serif;
+$font-header: 'Exo 2', sans-serif;
+$font-logo: 'Iceberg', sans-serif;
