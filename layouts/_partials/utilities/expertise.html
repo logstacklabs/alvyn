@@ -1,0 +1,18 @@
+{{ $exp := . }}
+<div class="container">
+    <div class="section-header">
+        <h2 class="section-title">{{ title ($exp.title | default "Focus Areas") }}</h2>
+        <p>{{ $exp.tagline }}</p>
+    </div>
+    <div class="grid">
+        {{ range $exp.entry }}
+            <div class="card focus-item">
+                <div class="icon">
+                    <i class="fa fa-xl fa-{{ lower .icon }}"></i>
+                </div>
+                <h3>{{ title .title }}</h3>
+                <p>{{ .description }}</p>
+            </div>
+        {{ end }}
+    </div>
+</div>

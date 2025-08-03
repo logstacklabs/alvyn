@@ -1,0 +1,20 @@
+{{ $projects := . }}
+<div class="container">
+    <div class="section-header">
+        <h2 class="section-title">{{ title ($projects.title | default "Projects") }}</h2>
+        <p>{{ $projects.tagline }}</p>
+    </div>
+    <div class="grid">
+        {{ range $projects.entry }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="card project-card">
+                <h3>{{ .title }}</h3>
+                <p>{{ .summary }}</p>
+                <div class="tech-stack">
+                    {{ range .techStack }}
+                        <span class="tag">{{ . }}</span>
+                    {{ end }}
+                </div>
+            </a>
+        {{ end }}
+    </div>
+</div>

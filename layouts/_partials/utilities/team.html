@@ -1,0 +1,52 @@
+{{ $team := . }}
+<div class="container">
+    <div class="section-header">
+        <h2 class="section-title">{{ title ($team.title | default "Meet the Team") }}</h2>
+        <p>{{ $team.tagline }}</p>
+    </div>
+    <div class="grid">
+        {{ range $team.member }}
+            <div class="card team-member">
+                {{ $avatar := "" }}
+                {{ $width := 48 }}
+                {{ $height := 48 }}
+                {{ with .avatar }}
+                    {{ $img := partial "functions/resolve-image.html" (dict
+                            "img" . "width" $width "height" $height) }}
+                    {{ $avatar = $img.url }}
+                    {{ $width = $img.width }}
+                    {{ $height = $img.height }}
+                {{ else }}
+                    {{ $name := .name | replaceRE "[^\\w\\s]+" "" | replaceRE "\\s+" "+" | lower }}
+                    {{ $avatar = printf "https://ui-avatars.com/api?name=%s&size=48&rounded=true&bold=true&background=random" $name }}
+                {{ end }}
+                <img src="{{ $avatar }}" alt="{{ .name }}" class="avatar">
+                <h3>{{ title .name }}</h3>
+                <p class="role">{{ title .role }}</p>
+                <p>{{ .summary }}</p>
+                <div class="social-links">
+                    {{ with .urls.github }}
+                        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" title="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    {{ end }}
+                    {{ with .urls.linkedin }}
+                        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    {{ end }}
+                    {{ with .urls.email }}
+                        <a href="mailto:{{ . }}" target="_blank" rel="noopener noreferrer" title="Email">
+                            <i class="fa-regular fa-envelope"></i>
+                        </a>
+                    {{ end }}
+                    {{ with .urls.website }}
+                        <a href="{{ . }}" target="_blank" rel="noopener noreferrer" title="Website">
+                            <i class="fa-solid fa-globe"></i>
+                        </a>
+                    {{ end }}
+                </div>
+            </div>
+        {{ end }}
+    </div>
+</div>

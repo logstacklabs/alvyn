@@ -1,0 +1,34 @@
+{{ define "main" }}
+    {{ $sections := .Site.Data.sections }}
+    <section id="hero" class="section">
+        {{ partial "utilities/hero.html" $sections.hero }}
+    </section>
+
+    <section id="about" class="section">
+        {{ partial "utilities/about.html" $sections.about }}
+    </section>
+
+    <section id="focus-areas" class="section">
+        {{ partial "utilities/expertise.html" $sections.expertise }}
+    </section>
+
+    <section id="projects" class="section">
+        {{ partial "utilities/projects.html" $sections.projects }}
+    </section>
+
+    <section id="blog" class="section">
+        {{ partial "utilities/rss.html" $sections.rssFeed }}
+    </section>
+
+    <section id="services" class="section">
+        {{ partial "utilities/services.html" $sections.services }}
+    </section>
+
+    <section id="team" class="section">
+        {{ partial "utilities/team.html" $sections.team }}
+    </section>
+
+    <section id="contact" class="section">
+        {{ partial "utilities/contact.html" $sections.contact }}
+    </section>
+{{ end }}

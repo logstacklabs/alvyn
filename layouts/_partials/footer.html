@@ -1,0 +1,27 @@
+<div class="container footer-content">
+    {{ $footer := site.Data.sections.footer }}
+    <div class="footer-links">
+        <div class="social-links">
+            {{ $socials := partial "functions/map-social-urls.html" $footer.socials }}
+            {{ range $socials }}
+                <a href="{{ .url }}" title="{{ .title }}" target="_blank" rel="noreferrer noopener">
+                    <i class="{{ .icon }}"></i>
+                </a>
+            {{ end }}
+        </div>
+        <div class="quick-links">
+            {{ range $footer.links }}
+                <a href="{{ .anchor }}" target="_blank">{{ title .label }}</a>
+            {{ end }}
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <p class="copyright-info">© {{ now.Year }} {{ $footer.ccHolder | default site.Title }}. All rights reserved.</p>
+        <small class="license-info">
+            <a href="https://github.com/logstacklabs/alvyn.git" rel="noopener noreferrer" target="_blank">ALVYN</a> by
+            <a href="https://logstack.dev" rel="noopener noreferrer" target="_blank">LOGSTACK LABS</a> |
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener noreferrer" target="_blank">CC BY-NC-SA 4.0</a> | Powered by
+            <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">HUGO</a>
+        </small>
+    </div>
+</div>

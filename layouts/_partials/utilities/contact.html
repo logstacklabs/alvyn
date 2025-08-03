@@ -1,0 +1,91 @@
+<div class="container">
+    {{ $contact := . }}
+    <div class="section-header">
+        <h2 class="section-title">{{ title ($contact.title |default "Contact Us") }}</h2>
+        <p>{{ $contact.tagline }}</p>
+    </div>
+    <div class="contact-wrapper">
+        <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            {{ with $contact.forms.keys.web3forms }}
+                <input type="hidden" name="access_key" value="{{ . }}">
+                <input type="hidden" name="from_name" value="{{ site.Title }}">
+                <label for="botcheck"></label>
+                <input type="checkbox" name="botcheck" id="botcheck" hidden>
+            {{ end }}
+            <div class="form-group">
+                <label for="name"></label>
+                <input type="text" id="name" name="Full Name" title="Enter your full name." placeholder="Name" required>
+            </div>
+            <div class="form-group">
+                <label for="email"></label>
+                <input type="email" id="email" name="Email" title="Enter a valid email." placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone"></label>
+                <input type="tel" id="phone" name="phone" placeholder="+1 (243) 567-8910" title="Enter a valid phone number." required>
+            </div>
+            <div class="form-group">
+                <label for="subject"></label>
+                <select id="subject" name="subject" required>
+                    <option value="">Select a subject</option>
+                    {{ range $contact.forms.formSubjects }}
+                        <option value="{{ . }}">{{ . }}</option>
+                    {{ end }}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message"></label>
+                <textarea id="message" name="Message" rows="5" title="Enter your message." placeholder="Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <div id="form-response" class="form-response" aria-live="polite"></div>
+        </form>
+        <div class="contact-info">
+            <h3>{{ title ($contact.cards.title | default "Our Info") }}</h3>
+            <div class="info-card">
+                {{ with first 2 $contact.cards.emails }}
+                    <i class="fa-regular fa-envelope-open"></i>
+                    <div>
+                        <h4>Email</h4>
+                        {{ range . }}
+                            <a href="mailto:{{ . }}">{{ . }}</a>
+                        {{ end }}
+                    </div>
+                {{ end }}
+            </div>
+            <div class="info-card">
+                {{ with first 2 $contact.cards.phones }}
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <h4>Phone</h4>
+                        {{ range . }}
+                            <a href="tel:{{ . | replaceRE "[^0-9+]" "" }}">{{ . }}</a>
+                        {{ end }}
+                    </div>
+                {{ end }}
+            </div>
+            <div class="info-card">
+                {{ with first 2 $contact.cards.locations }}
+                    <i class="fa-regular fa-map"></i>
+                    <div>
+                        <h4>Location</h4>
+                        {{ range . }}
+                            <p>{{ . }}</p>
+                        {{ end }}
+                    </div>
+                {{ end }}
+            </div>
+            <div class="info-card">
+                {{ with first 2 $contact.cards.hours }}
+                    <i class="fa-regular fa-clock"></i>
+                    <div>
+                        <h4>Hours</h4>
+                        {{ range . }}
+                            <p>{{ . }}</p>
+                        {{ end }}
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+</div>

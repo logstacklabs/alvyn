@@ -1,0 +1,160 @@
+{{ $attrs := partial "functions/get-site-attrs.html" . }}
+
+{{ with $attrs.url }}
+    <link rel="canonical" href="{{ . }}">
+{{ end }}
+
+{{ with $attrs.site_title | plainify }}
+    <meta itemprop="name" content="{{ . }}">
+{{ end }}
+
+{{ with $attrs.author }}
+    <meta name="author" content="{{ . }}">
+{{ end }}
+
+{{ with $attrs.description | plainify | htmlUnescape }}
+    <meta itemprop="description" content="{{ trim . "\n\r\t " }}">
+{{ end }}
+
+{{ with $attrs.keywords }}
+    <meta itemprop="keywords" name="keywords" content="{{ delimit . ", " }}">
+{{ end }}
+
+{{ with $attrs.date_published }}
+    <meta itemprop="datePublished" content="{{ . }}">
+{{ end }}
+
+{{ with $attrs.date_modified }}
+    <meta itemprop="dateModified" content="{{ . }}">
+{{ end }}
+
+{{ with $attrs.url }}
+    <meta itemprop="url" content="{{ . }}">
+{{ end }}
+
+{{ with $attrs.author }}
+    <meta itemprop="publisher" content="{{ . }}">
+{{ end }}
+
+{{ with $attrs.language_code }}
+    <meta itemprop="inLanguage" content="{{ . }}">
+{{ end }}
+
+{{ with .WordCount }}
+    <meta itemprop="wordCount" content="{{ . }}">
+{{ end }}
+
+{{ range $key, $img := $attrs.images }}
+    <meta itemprop="image" content="{{ $img }}">
+{{ end }}
+
+{{ with $attrs.keywords }}
+    <meta itemprop="keywords" content="{{ delimit . `, ` }}">
+{{ end }}
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:type" content="website">
+{{ with .Site.BaseURL }}
+    <meta property="og:url" content="{{ . }}">
+{{ end }}
+{{ with $attrs.site_title }}
+    <meta property="og:title" content="{{ . }}">
+{{ end }}
+{{ with $attrs.site_title }}
+    <meta property="og:site_name" content="{{ . }}">
+{{ end }}
+{{ with $attrs.description }}
+    <meta property="og:description" content="{{ . }}">
+{{ end }}
+{{ with (replace $attrs.language_code "-" "_") | default `en_US` }}
+    <meta property="og:locale" content="{{ . }}">
+{{ end }}
+{{ with $attrs.fb_admins }}
+    <meta property="fb:admins" content="{{ . }}" />
+{{ end }}
+{{ range $key, $img := $attrs.images }}
+    {{ if ne $key "tc_image" }}
+        <meta property="og:image" content="{{ $img }}">
+    {{ end }}
+{{ end }}
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+{{ with $attrs.url }}
+    <meta name="twitter:url" content="{{ . }}">
+{{ end }}
+
+{{ with $attrs.site_title }}
+    <meta name="twitter:title" content="{{ . }}">
+{{ end }}
+
+{{ with $attrs.twitter_handle }}
+    <meta name="twitter:site" content="@{{ . }}">
+    <meta name="twitter:creator" content="@{{ . }}">
+{{ end }}
+{{ with $attrs.description }}
+    <meta name="twitter:description" content="{{ . }}">
+{{ end }}
+{{ with $attrs.images.tc_image }}
+    <meta name="twitter:image" content="{{ . }}">
+{{ end }}
+
+<!-- Schema JSON + LD Script -->
+{{ $employees := slice }}
+{{ range site.Data.sections.team.member }}
+    {{ $content := dict
+            "@type" "Person"
+            "name" .name
+            "jobTitle" .role
+            "url" .urls.website
+            "email" .urls.email
+            "sameAs" (slice .urls.github .urls.linkedin) }}
+    {{ $employees = $employees | append $content }}
+{{ end }}
+
+{{ $makesOffer := slice }}
+{{ range site.Data.sections.services.entry }}
+    {{ $content := dict
+            "@type" "Offer"
+            "itemOffered" (dict "@type" "Service" "name" .title "description" .summary)
+    }}
+    {{ $makesOffer = $makesOffer | append $content }}
+{{ end }}
+
+{{ $founder := dict }}
+{{ with (index site.Data.sections.team.member 0) }}
+    {{ $founder = merge $founder (dict
+            "@type" "Person"
+            "name"  .name
+            "url"   .website) }}
+{{ end }}
+
+{{ $contactPoint := dict }}
+{{ with (index site.Data.sections.team.member 0) }}
+    {{ $contactPoint = merge $contactPoint (dict
+            "@type" "ContactPoint"
+            "telephone" (index (site.Data.sections.contact.cards.phones) 0)
+            "contactType" "Customer Service"
+            "areaServed" (index (split $attrs.language_code "_") 1)
+            "availableLanguage" $attrs.language_code) }}
+{{ end }}
+
+{{ $schema := dict
+        "@context"      "https://schema.org"
+        "@type"         "Organization"
+        "name"          $attrs.site_title
+        "url"           $attrs.url
+        "logo"          $attrs.images.logo
+        "sameAs"        $attrs.socials
+        "image"         $attrs.images.logo
+        "description"   $attrs.description
+        "foundingDate"  $attrs.copyright_year
+        "founder"       $founder
+        "contactPoint"  $contactPoint
+        "member"        $employees
+        "makesOffer"    $makesOffer
+}}
+
+<script type="application/ld+json">
+    {{ ($schema | jsonify (dict "prefix" "    " "indent" "    ")) | safeJS }}
+</script>

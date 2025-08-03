@@ -1,0 +1,15 @@
+{{ $about := . }}
+<div class="container about-content">
+    <div class="about-summary">
+        <h2 class="section-title">{{ title ($about.title | default "About Us") }}</h2>
+        <p>{{ $about.summary | markdownify }}</p>
+    </div>
+    <div class="about-highlights">
+        <h3>{{ $about.highlights.title }}</h3>
+        <ul>
+            {{ range first 4 $about.highlights.entries }}
+                <li>{{ . }}</li>
+            {{ end }}
+        </ul>
+    </div>
+</div>
