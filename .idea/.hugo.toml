@@ -1,0 +1,50 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-US'
+title = ''
+theme = ''
+
+[params]
+    description = ''
+    keywords = []
+
+    [params.config]
+        logo = ''
+        favicon = ''
+
+    [params.config.analytics]
+        goatCounter = ''
+        googleAnalytics = ''
+
+    [params.config.seo]
+        fbAdminsId = ''
+        twitterHandle = ''
+        opengraphImage = ''
+        twitterCardImage = ''
+
+
+[menus]
+    [[menus.main]]
+        name = 'About'
+        weight = 10
+    [[menus.main]]
+        name = 'Projects'
+        weight = 20
+    [[menus.main]]
+        name = 'Blog'
+        weight = 30
+    [[menus.main]]
+        name = 'Contact'
+        weight = 40
+
+[outputs]
+    home = ['HTML', 'RSS']
+
+[taxonomies]
+
+[minify]
+    minifyOutput = false
+
+[module]
+    [module.hugoVersion]
+        extended = false
+        min = '0.148.0'

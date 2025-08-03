@@ -1,0 +1,93 @@
+[hero]
+    tagline = ''
+    summary = ''
+    [[hero.cta]]
+        anchor = '' # Link of the CTA button.
+        label = '' # Label/Title of the CTA button.
+    # A maximum of 3 buttons will be displayed on the hero section
+
+
+[about]
+    title = ''
+    summary = ''
+    [about.highlights]
+        title = ''
+        entries = []
+
+
+[expertise]
+    title = ''
+    tagline = ''
+    [[expertise.entry]]
+        icon = ''
+        title = ''
+        description = ''
+
+
+[projects]
+    title = ''
+    tagline = ''
+    [[projects.entry]]
+        title = ''
+        url = ''
+        summary = ''
+        techStack = []
+
+
+[rssFeed]
+    title = ''
+    tagline = ''
+    url = ''
+
+
+[services]
+    title = ''
+    tagline = ''
+    [[services.entry]]
+        title = ''
+        summary = ''
+
+
+[team]
+    title = ''
+    tagline = ''
+    [[team.member]]
+        avatar = ''
+        name = ''
+        role = ''
+        summary = ''
+        [team.member.urls]
+            website = ''
+            email = ''
+            github = ''
+            linkedin = ''
+
+
+[contact]
+    title = ''
+    tagline = ''
+    [contact.forms]
+        formSubjects = []
+    [contact.forms.keys]
+        web3forms = ''
+        recaptcha = ''
+    [contact.cards]
+        title = ''
+        phones = []
+        hours = []
+        emails = []
+        locations = []
+
+
+[footer]
+    ccHolder = ''
+    [[footer.links]]
+        anchor = ''
+        label = ''
+    [footer.socials]
+        GitHub = ''
+        youtube = ''
+        LinkedIn = ''
+    [footer.socials.others]
+    # This section is for icons that are not available under font-awesome's `fa-brands` category.
+        blog = ''
