@@ -1,0 +1,23 @@
+{
+    "name": "alvyn",
+    "version": "1.0.0",
+    "description": "",
+    "license": "CC BY-NC-SA 4.0",
+    "scripts": {
+        "build": "hugo",
+        "preview": "hugo server",
+        "clean": "rm -r .hugo_build.lock resources public && clear"
+    },
+    "author": {
+        "url": "https://msio.me",
+        "name": "Muhammed A. Senghore",
+        "email": "logstacklabs@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/logstacklabs/alvyn.git"
+    },
+    "dependencies": {
+        "@logstack/eon": "^1.0.1"
+    }
+}
