@@ -77,6 +77,9 @@ npm run build
 
 # Runs: hugo.
 ```
+
+#### See the [.hugo.toml](../.idea/.hugo.toml) & [.sections.toml](../.idea/.sections.toml) files in the [`..idea/`](../.idea) directory for the full configurations.
+
 Then Preview your site at [localhost:1313](http://localhost:1313).
 
 ## 🍰 Contributing

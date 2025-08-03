@@ -10,7 +10,9 @@
 # Will include later
 node_modules
 package-lock.json
+assets/images/
 hugo.toml
 data/sections.toml
 assets/sass/components/_newsletter.scss
 layouts/_partials/utilities/newsletter.html
+assets/css/
