@@ -101,15 +101,17 @@
 
 <!-- Schema JSON + LD Script -->
 {{ $employees := slice }}
-{{ range site.Data.sections.team.member }}
-    {{ $content := dict
-            "@type" "Person"
-            "name" .name
-            "jobTitle" .role
-            "url" .urls.website
-            "email" .urls.email
-            "sameAs" (slice .urls.github .urls.linkedin) }}
-    {{ $employees = $employees | append $content }}
+{{ with site.Data.sections.team.member }}
+    {{ range . }}
+        {{ $content := dict
+                "@type" "Person"
+                "name" .name
+                "jobTitle" .role
+                "url" .urls.website
+                "email" .urls.email
+                "sameAs" (slice .urls.github .urls.linkedin) }}
+        {{ $employees = $employees | append $content }}
+    {{ end }}
 {{ end }}
 
 {{ $makesOffer := slice }}
@@ -122,22 +124,26 @@
 {{ end }}
 
 {{ $founder := dict }}
-{{ with (index site.Data.sections.team.member 0) | default $attrs.copyright_holder }}
+{{ with (index site.Data.sections.team.member 0) }}
     {{ $founder = merge $founder (dict
             "@type" "Person"
-            "name"  (.name | default $attrs.copyright_holder)
-            "url"   (.website | default site.Title)) }}
+            "name"  .name
+            "url"   .website) }}
+{{ else }}
+    {{ $founder = merge $founder (dict
+            "@type" "Person"
+            "name"  $attrs.copyright_holder
+            "url"   site.Title) }}
 {{ end }}
 
 {{ $contactPoint := dict }}
-{{ with (index site.Data.sections.team.member 0) }}
-    {{ $contactPoint = merge $contactPoint (dict
-            "@type" "ContactPoint"
-            "telephone" (index (site.Data.sections.contact.cards.phones) 0)
-            "contactType" "Customer Service"
-            "areaServed" (index (split $attrs.language_code "_") 1)
-            "availableLanguage" $attrs.language_code) }}
-{{ end }}
+{{ $contactPoint = merge $contactPoint (dict
+        "@type" "ContactPoint"
+        "telephone" (index (site.Data.sections.contact.cards.phones) 0)
+        "contactType" "Customer Service"
+        "areaServed" (index (split $attrs.language_code "_") 1)
+        "availableLanguage" $attrs.language_code) }}
+
 
 {{ $schema := dict
         "@context"      "https://schema.org"
