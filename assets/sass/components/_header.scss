@@ -1,0 +1,88 @@
+@use '../base/mixins' as *;
+@use '../base/global' as *;
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(.625rem);
+    border-bottom: .0625rem solid var(--border-color);
+    box-shadow: 0 .125rem .625rem var(--shadow-primary);
+}
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include breakpoint(large) {
+        gap: 1rem;
+    }
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    font-family: $font-logo;
+    font-weight: 700;
+    font-size: 1.5rem;
+    @include font-size(1rem, 1.5rem);
+    color: var(--text-color);
+    img, svg {
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
+.nav-links {
+    display: flex;
+    a {
+        color: var(--text-color);
+        margin: 0 1rem;
+        font-weight: 500;
+        &:hover, &.active {
+            color: var(--accent);
+        }
+    }
+    @include breakpoint(large) {
+        position: fixed;
+        top: 4.4rem;
+        right: -100%;
+        flex-direction: column;
+        background: var(--nav-bg);
+        width: 100%;
+        text-align: center;
+        padding: 1.25rem 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 .625rem .875rem var(--shadow-primary);
+        &.active {
+            right: 0;
+        }
+        a {
+            margin: .875rem 0;
+        }
+    }
+}
+.theme-toggle {
+    color: var(--text-color);
+    padding: 0.5rem;
+    &:hover {
+        color: var(--accent);
+    }
+    i {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+.menu-toggle {
+    display: none;
+    padding: 0.5rem;
+    color: var(--text-color);
+    &:hover {
+        color: var(--accent);
+    }
+    @include breakpoint(large) {
+        display: block;
+    }
+}
