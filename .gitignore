@@ -16,3 +16,6 @@ data/sections.toml
 assets/sass/components/_newsletter.scss
 layouts/_partials/utilities/newsletter.html
 assets/css/
+public/
+resources/
+.hugo_build.lock
