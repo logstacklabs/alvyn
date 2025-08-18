@@ -13,8 +13,8 @@
                     {{ $dateHuman := .pubDate | dateFormat "Jan, 2006" }}
                     {{ $dateMachine := .pubDate | dateFormat (printf "%s" .Store.Get "dateFormat")}}
                     <time class="date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-                    <h4>{{ title .title }}</h4>
-                    <p>{{ .description | truncate 64 }}</p>
+                    <h4>{{ title (plainify .title) }}</h4>
+                    <p>{{ (plainify .description) | truncate 64 }}</p>
                 </a>
             {{ else }}
                 <p>No recent posts available.</p>
